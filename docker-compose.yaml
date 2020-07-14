@@ -1,0 +1,37 @@
+version: "3.7"
+services:
+  mongo:
+    image: mongo
+    container_name: media_db
+    volumes:
+      - media_db:/data/db
+      - media_config_db:/data/configdb
+    ports:
+      - 27018:27017
+    networks:
+      - media_network
+  ws:
+    build: .
+    container_name: media_ws
+    ports:
+      - 2807:2807
+    environment:
+      - MONGO_HOST=mongo
+    depends_on:
+      - mongo
+    volumes:
+      - media_storage:/storage
+    networks:
+      - media_network
+
+volumes:
+  media_db:
+    name: media_db
+  media_config_db:
+    name: media_config_db
+  media_storage:
+    name: media_storage
+
+networks:
+  media_network:
+    name: media_network
