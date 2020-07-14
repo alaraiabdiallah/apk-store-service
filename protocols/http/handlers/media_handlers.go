@@ -75,7 +75,7 @@ func UploadMedia(c echo.Context) error {
 	})
 }
 
-func GetLatestVersionByFlag(c echo.Context) error {
+func GetLatestVersionAPKByFlag(c echo.Context) error {
 	var result models.MediaDS
 	flag := c.QueryParam("flag")
 	if flag == "" {

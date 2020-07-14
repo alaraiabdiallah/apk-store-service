@@ -14,9 +14,15 @@ func HttpRouters(e *echo.Echo){
 		version := fmt.Sprintf("App version %v", app.Ctx().GetVersion())
 		return c.String(http.StatusOK, version)
 	})
-	v1 := e.Group("/v1/apk")
-	v1.GET("/", handlers.GetAllMedia, middlewares.APIAuth)
-	v1.GET("/get-latest-version", handlers.GetLatestVersionByFlag, middlewares.APIAuthWithQuery)
-	v1.GET("/:media_id", handlers.ShowMediaFile)
-	v1.POST("/", handlers.UploadMedia, middlewares.APIAuth)
+	v1 := e.Group("/v1")
+	apk := v1.Group("/apk")
+	apk.GET("/", handlers.GetAllMedia, middlewares.APIAuth)
+	apk.GET("/get-latest-version", handlers.GetLatestVersionAPKByFlag, middlewares.APIAuthWithQuery)
+	apk.GET("/:media_id", handlers.ShowMediaFile)
+	apk.POST("/", handlers.UploadMedia, middlewares.APIAuth)
+
+	ver := v1.Group("/versions")
+	ver.GET("/", handlers.GetAllVersionHandler, middlewares.APIAuth)
+	ver.PATCH("/", handlers.SaveVersionHandler, middlewares.APIAuth)
+
 }
