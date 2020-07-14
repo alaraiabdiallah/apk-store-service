@@ -1,6 +1,6 @@
-# Media service
+# APK Store Service
 
-Small service to store your file
+Small service to store your APKs
 
 ## System Requirement
 
