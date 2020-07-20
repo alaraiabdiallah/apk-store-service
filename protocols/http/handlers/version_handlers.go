@@ -32,13 +32,17 @@ func GetAllVersionHandler(c echo.Context) error {
 	if err := app.GetAllVersion(query, &results); err != nil {return err}
 	var dataResp interface{}  = results
 	if is_wrap_content == "true"{
-		dataResp = echo.Map{
-			"contents": results,
-		}
+		dataResp = echo.Map{"contents": results}
+		return c.JSON(http.StatusOK, echo.Map{
+			"code": http.StatusOK,
+			"status": "true",
+			"message": "",
+			"data": dataResp,
+		})
 	}
 	return c.JSON(http.StatusOK, echo.Map{
 		"status": "true",
 		"message": "",
-		"data": dataResp,
+		"data": results,
 	})
 }
