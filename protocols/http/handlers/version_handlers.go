@@ -20,15 +20,25 @@ func SaveVersionHandler(c echo.Context) error {
 func GetAllVersionHandler(c echo.Context) error {
 	var results []models.VersionDS
 	query := echo.Map{}
-
+	is_wrap_content := "false"
 	for k, v := range c.QueryParams() {
-		query[k] = v[0]
-	}
+		if k == "wrap-contents"{
+			is_wrap_content = v[0]
+		}else{
+			query[k] = v[0]
+		}
 
+	}
 	if err := app.GetAllVersion(query, &results); err != nil {return err}
+	var dataResp interface{}  = results
+	if is_wrap_content == "true"{
+		dataResp = echo.Map{
+			"contents": results,
+		}
+	}
 	return c.JSON(http.StatusOK, echo.Map{
-		"status": true,
+		"status": "true",
 		"message": "",
-		"data": results,
+		"data": dataResp,
 	})
 }
