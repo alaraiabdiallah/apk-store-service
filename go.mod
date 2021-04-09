@@ -13,7 +13,7 @@ require (
 	github.com/google/go-cmp v0.4.0 // indirect
 	github.com/gosimple/slug v1.9.0
 	github.com/h2non/filetype v1.0.12
-	github.com/joho/godotenv v1.3.0 // indirect
+	github.com/joho/godotenv v1.3.0
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/gommon v0.3.0
 	github.com/mitchellh/mapstructure v1.1.2

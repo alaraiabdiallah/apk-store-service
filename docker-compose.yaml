@@ -17,6 +17,7 @@ services:
       - 2807:2807
     environment:
       - MONGO_HOST=mongo
+      - API_KEY=test
     depends_on:
       - mongo
     volumes:
